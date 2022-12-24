@@ -4,9 +4,8 @@ const Context = createContext("Default Value");
 
 export function Main(){
 
-    const value = "My Value 2"
     return(
-        <Context.Provider value={value}>
+        <Context.Provider value={{lang: "EN" }}>
             <Sidebar/>
         </Context.Provider>
 
@@ -20,6 +19,7 @@ function Sidebar (){
 // This pattern where properties are passed and access via context is Provider pattern. 
 // Value is sent in from App > Sidebar > List without actually affecting Sidebar ( no prop drilling)
 function List(){
-    const value = useContext(Context)
-    return <span>This is list and value is - {value}</span>
+    return <Context.Consumer> 
+        {({lang}) => (<span>This is list and value is - {lang}</span> )}
+        </Context.Consumer>
 }
